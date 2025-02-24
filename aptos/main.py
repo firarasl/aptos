@@ -194,6 +194,6 @@ def verbose_config_name(config):
 if __name__ == "__main__":
     data_path ="/src/rfir/project/aptos2019-blindness-detection"
     runner = Runner()
-    config = load_config(f"{data_path}/experiments/diabetic-retinopathy.yml")
+    config = load_config(f"{data_path}/experiments/config.yml")
     runner.train(config=config, resume=True)
 

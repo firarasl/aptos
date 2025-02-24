@@ -131,17 +131,16 @@ class Mish(nn.Module):
         return x * (torch.tanh(F.softplus(x)))
 
 
-class EffNetTimm(nn.Module):
-    def __init__(self, model="b2", num_classes=5, pretrained=True, verbose=0):
-        super(EffNetTimm, self).__init__()
+class EffNetVit(BaseModel):
+    def __init__(self, model='efficientvit_mit_b2', num_classes=1, pretrained=True, verbose=0):
+        super().__init__(verbose)
+        model = 'efficientvit_b2.r256_in1k'
+        if pretrained:
+            self.model = timm.create_model(model, pretrained=True, num_classes=num_classes)
+        else:
+            self.model = timm.create_model(model, pretrained=False, num_classes=num_classes)
 
-        # Use the model argument from YAML
-        model_name = f"efficientnet_{model}"  # Converts "b2" -> "efficientnet_b2"
-
-        self.model = timm.create_model(model_name, pretrained=pretrained, num_classes=num_classes)
-
-        if verbose:
-             print(f"Loaded model: {model_name}, Pretrained: {pretrained}, Classes: {num_classes}")
+        self.logger.info(f'<init>: \n{self}')
 
     def forward(self, x):
         return self.model(x)
@@ -151,4 +150,5 @@ class EffNetTimm(nn.Module):
 
     def __repr__(self):
         return self.__str__()
+
 

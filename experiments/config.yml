@@ -5,10 +5,10 @@ seed: 12346
 
 
 arch:
-  type: EffNetTimm
+  type: EffNetVit
   args:
     model: b2
-    num_classes: 5
+    num_classes: 1
     pretrained: true
     verbose: 0
 

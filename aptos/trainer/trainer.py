@@ -47,6 +47,8 @@ class Trainer(BaseTrainer):
             # self.logger.info(f'target: {target}')
             self.optimizer.zero_grad()
             output = self.model(data)
+            print("LOOK at output shape")
+            print(output.shape)
             means = torch.zeros_like(target)
             noise = torch.normal(mean=means, std=self.noise_std)
             loss = self.loss(output, target + noise)
